@@ -1,0 +1,1 @@
+from . MainControl import AppFunction
