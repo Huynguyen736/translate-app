@@ -1,0 +1,11 @@
+<RCC>
+  <qresource prefix="new">
+    <file>copy - Copy.png</file>
+    <file>copy.png</file>
+    <file>louder - Copy.png</file>
+    <file>louder.png</file>
+    <file>sync (2) - Copy.png</file>
+    <file>sync (2).png</file>
+    <file>tab.png</file>
+  </qresource>
+</RCC>

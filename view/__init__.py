@@ -1,0 +1,1 @@
+from . view import Ui_TranslateApp
