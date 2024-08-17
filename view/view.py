@@ -9,8 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
-
+from googletrans import LANGCODES, LANGUAGES
 
 class Ui_TranslateApp(object):
     def setupUi(self, TranslateApp):
@@ -121,7 +120,7 @@ class Ui_TranslateApp(object):
         self.pushButton.setStyleSheet("background-color: rgb(74, 136, 199);")
         self.pushButton.setObjectName("pushButton")
         self.comboBox = QtWidgets.QComboBox(self.centralwidget)
-        self.comboBox.setGeometry(QtCore.QRect(220, 140, 261, 51))
+        self.comboBox.setGeometry(QtCore.QRect(220, 140, 161, 51))
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(20)
@@ -134,11 +133,11 @@ class Ui_TranslateApp(object):
 "    border-radius: 15px\n"
 "}")
         self.comboBox.setObjectName("comboBox")
-        self.comboBox.addItem("")
-        self.comboBox.addItem("")
-        self.comboBox.addItem("")
-        self.comboBox.addItem("")
-        self.comboBox.addItem("")
+        self.comboBox.addItem("Tiếng Anh", "en")
+        self.comboBox.addItem("Tiếng Việt", "vi")
+        self.comboBox.addItem("Tiếng Trung", "zh-cn")
+        self.comboBox.addItem("Tiếng Nhật", "ja")
+        self.comboBox.addItem("Tiếng Hàn", "ko")
         self.comboBox_2 = QtWidgets.QComboBox(self.centralwidget)
         self.comboBox_2.setGeometry(QtCore.QRect(910, 140, 261, 51))
         font = QtGui.QFont()
@@ -153,11 +152,11 @@ class Ui_TranslateApp(object):
 "    border-radius: 15px\n"
 "}")
         self.comboBox_2.setObjectName("comboBox_2")
-        self.comboBox_2.addItem("Tiếng Việt")
-        self.comboBox_2.addItem("Tiếng Anh")
-        self.comboBox_2.addItem("Tiếng Trung")
-        self.comboBox_2.addItem("")
-        self.comboBox_2.addItem("")
+        self.comboBox_2.addItem("Tiếng Anh", "en")
+        self.comboBox_2.addItem("Tiếng Việt", "vi")
+        self.comboBox_2.addItem("Tiếng Trung", "zh-cn")
+        self.comboBox_2.addItem("Tiếng Nhật", "ja")
+        self.comboBox_2.addItem("Tiếng Hàn", "ko")
         TranslateApp.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(TranslateApp)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1280, 21))
@@ -192,6 +191,5 @@ class Ui_TranslateApp(object):
         self.comboBox_2.setItemText(2, _translate("TranslateApp", "Tiếng Trung"))
         self.comboBox_2.setItemText(3, _translate("TranslateApp", "Tiếng Nhật"))
         self.comboBox_2.setItemText(4, _translate("TranslateApp", "Tiếng Hàn"))
-
 
 from . import new_rc
