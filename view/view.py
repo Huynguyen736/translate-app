@@ -192,6 +192,4 @@ class Ui_TranslateApp(object):
         self.comboBox_2.setItemText(2, _translate("TranslateApp", "Tiếng Trung"))
         self.comboBox_2.setItemText(3, _translate("TranslateApp", "Tiếng Nhật"))
         self.comboBox_2.setItemText(4, _translate("TranslateApp", "Tiếng Hàn"))
-
-
 from . import new_rc

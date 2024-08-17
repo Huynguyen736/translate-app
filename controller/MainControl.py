@@ -16,17 +16,20 @@ class AppFunction:
         global wgs
         wgs = UI
         self.widget = QWidget()
-        self.showTranslate()
-        self.copyText()
+        self.init_connect()
         
-    
-    def showTranslate(self):
-        wgs.pushButton.clicked.connect(lambda: wgs.textEdit_2.setText(trans.translate(wgs.textEdit.toPlainText(), dest=languagesCodes[wgs.comboBox_2.currentText()]).text)) 
-        #Translate when clicked the button using translate(<text>, <lang>)
-        
+
+    def init_connect(self):
+        wgs.pushButton.clicked.connect(lambda: self.transFunc())  #Translate when clicked the button using translate(<text>, <lang>)
+        wgs.copy.clicked.connect(lambda: self.copyText()) #Connect to copy button
+
+    def transFunc(self):
+        text = trans.translate(wgs.textEdit.toPlainText(), dest=languagesCodes[wgs.comboBox_2.currentText()]).text  # Translate and convert text
+        wgs.textEdit_2.setText(text)
+
     def copyText(self):
-        wgs.copy.clicked.connect(lambda: pyperclip.copy(wgs.textEdit.toPlainText()))
-        wgs.copy.clicked.connect(lambda: QMessageBox.information(self.widget, "Notice", "Copied!")) #QMessageBox first arg must be related to QWidget
+        pyperclip.copy(wgs.textEdit.toPlainText())
+        QMessageBox.information(self.widget, "Notice", "Copied!") #QMessageBox first arg must be related to QWidget
         #Alert when copy
 
 
