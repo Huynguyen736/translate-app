@@ -6,10 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="7871247b-f956-4968-8f23-207407f19bb0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Annotation 2024-08-18 230105.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Annotation 2024-08-18 230220.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/controller/MainControl.py" beforeDir="false" afterPath="$PROJECT_DIR$/controller/MainControl.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/view.py" beforeDir="false" afterPath="$PROJECT_DIR$/view/view.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view2.py" beforeDir="false" afterPath="$PROJECT_DIR$/view2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/louder.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mic (2).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tab.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/view2.py (day la uipage1)" beforeDir="false" afterPath="$PROJECT_DIR$/uipage1.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,18 +46,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.MainControl.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.view.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/son13/PyCharmIndependentProjects/TranslationApp&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.MainControl.executor": "Run",
+    "Python.main.executor": "Run",
+    "Python.view.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "Merging master",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/son13/PyCharmIndependentProjects/TranslationApp",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
-}</component>
+}]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
