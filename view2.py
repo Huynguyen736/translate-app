@@ -111,11 +111,11 @@ class Ui_TranslateApp(object):
 "    border-radius: 15px\n"
 "}")
         self.combobox.setObjectName("combobox")
-        self.combobox.addItem("")
-        self.combobox.addItem("")
-        self.combobox.addItem("")
-        self.combobox.addItem("")
-        self.combobox.addItem("")
+        self.combobox.addItem("Tiếng Anh")
+        self.combobox.addItem("Tiếng Việt")
+        self.combobox.addItem("Tiếng Trung")
+        self.combobox.addItem("Tiếng Nhật")
+        self.combobox.addItem("Tiếng Hàn")
         self.loa2 = QtWidgets.QPushButton(self.centralwidget)
         self.loa2.setGeometry(QtCore.QRect(960, 600, 61, 51))
         self.loa2.setStyleSheet("QPushButton {\n"

@@ -1,10 +1,16 @@
 from googletrans import Translator
 from PyQt5.QtWidgets import QMessageBox
 from PyQt5.QtWidgets import QWidget
+from PyQt5.QtMultimedia import QSound
 import pyperclip
 from gtts import gTTS
-from pydub import AudioSegment
-from pydub.playback import play
+
+#import pydub
+#from pydub.playback import play
+#import time
+#import pygame
+#import wave
+#import pyaudio
 
 languagesCodes = {
     "Tiếng Anh":"en",
@@ -14,21 +20,26 @@ languagesCodes = {
     "Tiếng Trung": "zh-cn"
 }
 trans = Translator()
+
 class AppFunction:
     def __init__(self, UI) -> None:
         global wgs
         wgs = UI
         self.widget = QWidget()
         self.init_connect()
+        self.swap_language()
+        self.audio_page_1()
 
     def init_connect(self):
+        wgs.loa.clicked.connect(lambda: self.audio_page_1())
         wgs.pushButton.clicked.connect(lambda: self.transFunc())  #Translate when clicked the button using translate(<text>, <lang>)
         wgs.copy.clicked.connect(lambda: self.copyText()) #Connect to copy button
         wgs.reverse.clicked.connect(lambda: self.swap_language())
 
     def transFunc(self):
-        text = trans.translate(wgs.textEdit.toPlainText(), src=languagesCodes[wgs.comboBox.currentText()], dest=languagesCodes[wgs.comboBox_2.currentText()]).text # Translate and convert text
+        text = trans.translate(wgs.textEdit.toPlainText(), dest=languagesCodes[wgs.comboBox_2.currentText()]).text # Translate and convert text
         wgs.textEdit_2.setText(text)
+
 
     def copyText(self):
         pyperclip.copy(wgs.textEdit.toPlainText())
@@ -42,14 +53,14 @@ class AppFunction:
         wgs.comboBox_2.setCurrentIndex(combobox_1_index)
 
     def audio_page_1(self):
-        textedit_doc = wgs.textEdit.document()
-        tts_content = textedit_doc.toPlainText()
-        print(tts_content)
-        tts_language = wgs.comboBox.currentData()
-        print(tts_language)
-        tts_object = gTTS(text=tts_content, lang=tts_language)
-        file_path = "output.mp3"
-        tts_object.save(file_path)
-        audio = AudioSegment.from_mp3(file_path)
-        play(audio)
+        try:
+            tts_object = gTTS(text="test", lang="en")
+            #tts_object = gTTS(text=wgs.textEdit.toPlainText(), lang=languagesCodes[wgs.comboBox.currentText()])
+            tts_object.save("output.wav")
+            # Audio playback (didn't work)
+            QSound.play("C:\\Users\\son13\\PyCharmIndependentProjects\\translate-app\\output.wav")
+            print(QSound.fileName())
+            
+        except Exception as e:
+            print(f"An error occurred: {e}")
 
