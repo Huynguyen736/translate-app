@@ -4,14 +4,8 @@ from PyQt5.QtWidgets import QWidget
 from PyQt5 import QtMultimedia, QtCore
 import pyperclip
 from gtts import gTTS
-import os, sys
+import requests
 
-#import pydub
-#from pydub.playback import play
-#import time
-#import pygame
-#import wave
-#import pyaudio
 
 languagesCodes = {
 	"Tiếng Anh":"en",
@@ -31,14 +25,15 @@ class AppFunction:
 		self.init_variable()
 		# self.swap_language()
 
-	#initialization connection
+	# Initialization connection
 	def init_connect(self):
 		wgs.loa1.clicked.connect(lambda: self.audio_page_1())
-		wgs.dich.clicked.connect(lambda: self.transFunc())  #Translate when clicked the button using translate(<text>, <lang>)
-		wgs.copy1.clicked.connect(lambda: self.copyText()) #Connect to copy button
-		#wgs.reverse.clicked.connect(lambda: self.swap_language())
+		wgs.dich.clicked.connect(lambda: self.transFunc())  # Translate when clicked the button using translate(<text>, <lang>)
+		wgs.copy1.clicked.connect(lambda: self.copyText()) # Connect to copy button
+		# wgs.reverse.clicked.connect(lambda: self.swap_language())
+		
 
-	#initialization variable
+	# Initialization variable
 	def init_variable(self):
 		self.player = QtMultimedia.QMediaPlayer()
 	
@@ -60,7 +55,18 @@ class AppFunction:
 	def audio_page_1(self):
 		tts_object = gTTS(text=wgs.textEdit.toPlainText(), lang=languagesCodes[wgs.combobox.currentText()])
 		tts_object.save("output.wav")
-		# Audio playback (didn't work)
+		# Audio playback
 		self.player.setMedia(QtMultimedia.QMediaContent(QtCore.QUrl.fromLocalFile("output.wav")))
 		self.player.play()
 
+	def request_data(self):
+		api_key = "0ce55ada-b016-4ebc-bf6b-0ef882015e5b"
+		url = f"https://www.dictionaryapi.com/api/v3/references/collegiate/json/{word}?key={api_key}"
+		response = requests.get(url)
+		if response.status_code == 200:
+			return response.json()
+		else:
+			return None
+		
+		# Đọc input
+		
