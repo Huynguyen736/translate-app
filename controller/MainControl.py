@@ -21,7 +21,6 @@ languagesCodes = {
 	"Tiếng Trung": "zh-cn"
 }
 trans = Translator()
-CURRENT_DIR = os.path.dirname(os.path.realpath(__file__))
 
 class AppFunction:
 	def __init__(self, UI) -> None:
@@ -29,18 +28,23 @@ class AppFunction:
 		wgs = UI
 		self.widget = QWidget()
 		self.init_connect()
-		self.swap_language()
-	
+		self.init_variable()
+		# self.swap_language()
+
+	#initialization connection
 	def init_connect(self):
-		wgs.loa.clicked.connect(lambda: self.audio_page_1())
-		wgs.pushButton.clicked.connect(lambda: self.transFunc())  #Translate when clicked the button using translate(<text>, <lang>)
-		wgs.copy.clicked.connect(lambda: self.copyText()) #Connect to copy button
-		wgs.reverse.clicked.connect(lambda: self.swap_language())
+		wgs.loa1.clicked.connect(lambda: self.audio_page_1())
+		wgs.dich.clicked.connect(lambda: self.transFunc())  #Translate when clicked the button using translate(<text>, <lang>)
+		wgs.copy1.clicked.connect(lambda: self.copyText()) #Connect to copy button
+		#wgs.reverse.clicked.connect(lambda: self.swap_language())
+
+	#initialization variable
+	def init_variable(self):
+		self.player = QtMultimedia.QMediaPlayer()
 	
 	def transFunc(self):
-		text = trans.translate(wgs.textEdit.toPlainText(), dest=languagesCodes[wgs.comboBox_2.currentText()]).text # Translate and convert text
+		text = trans.translate(wgs.textEdit.toPlainText(), dest=languagesCodes[wgs.combobox.currentText()]).text # Translate and convert text
 		wgs.textEdit_2.setText(text)
-	
 	
 	def copyText(self):
 		pyperclip.copy(wgs.textEdit.toPlainText())
@@ -54,14 +58,9 @@ class AppFunction:
 		wgs.comboBox_2.setCurrentIndex(combobox_1_index)
 	
 	def audio_page_1(self):
-		try:
-			tts_object = gTTS(text=wgs.textEdit.toPlainText(), lang=languagesCodes[wgs.comboBox.currentText()])
-			tts_object.save("output.wav")
-			# Audio playback (didn't work)
-			filename = os.path.join(CURRENT_DIR, "output.wav")
-			QtMultimedia.QSound.play(filename)
-			
-		
-		except Exception as e:
-			print(f"An error occurred: {e}")
+		tts_object = gTTS(text=wgs.textEdit.toPlainText(), lang=languagesCodes[wgs.combobox.currentText()])
+		tts_object.save("output.wav")
+		# Audio playback (didn't work)
+		self.player.setMedia(QtMultimedia.QMediaContent(QtCore.QUrl.fromLocalFile("output.wav")))
+		self.player.play()
 
