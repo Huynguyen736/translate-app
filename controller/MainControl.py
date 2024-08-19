@@ -29,21 +29,21 @@ class AppFunction:
 		self.widget = QWidget()
 		self.init_connect()
 		self.init_variable()
-		self.swap_language()
+		# self.swap_language()
 
 	#initialization connection
 	def init_connect(self):
-		wgs.loa.clicked.connect(lambda: self.audio_page_1())
-		wgs.pushButton.clicked.connect(lambda: self.transFunc())  #Translate when clicked the button using translate(<text>, <lang>)
-		wgs.copy.clicked.connect(lambda: self.copyText()) #Connect to copy button
-		wgs.reverse.clicked.connect(lambda: self.swap_language())
+		wgs.loa1.clicked.connect(lambda: self.audio_page_1())
+		wgs.dich.clicked.connect(lambda: self.transFunc())  #Translate when clicked the button using translate(<text>, <lang>)
+		wgs.copy1.clicked.connect(lambda: self.copyText()) #Connect to copy button
+		#wgs.reverse.clicked.connect(lambda: self.swap_language())
 
 	#initialization variable
 	def init_variable(self):
 		self.player = QtMultimedia.QMediaPlayer()
 	
 	def transFunc(self):
-		text = trans.translate(wgs.textEdit.toPlainText(), dest=languagesCodes[wgs.comboBox_2.currentText()]).text # Translate and convert text
+		text = trans.translate(wgs.textEdit.toPlainText(), dest=languagesCodes[wgs.combobox.currentText()]).text # Translate and convert text
 		wgs.textEdit_2.setText(text)
 	
 	def copyText(self):
@@ -58,7 +58,7 @@ class AppFunction:
 		wgs.comboBox_2.setCurrentIndex(combobox_1_index)
 	
 	def audio_page_1(self):
-		tts_object = gTTS(text=wgs.textEdit.toPlainText(), lang=languagesCodes[wgs.comboBox.currentText()])
+		tts_object = gTTS(text=wgs.textEdit.toPlainText(), lang=languagesCodes[wgs.combobox.currentText()])
 		tts_object.save("output.wav")
 		# Audio playback (didn't work)
 		self.player.setMedia(QtMultimedia.QMediaContent(QtCore.QUrl.fromLocalFile("output.wav")))

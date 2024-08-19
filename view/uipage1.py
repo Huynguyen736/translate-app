@@ -201,7 +201,7 @@ class Ui_TranslateApp(object):
         self.combobox.setItemText(4, _translate("TranslateApp", "Tiếng Hàn"))
         self.page1.setText(_translate("TranslateApp", "1"))
         self.page2.setText(_translate("TranslateApp", "2"))
-import new_rc
+from . import new_rc
 
 
 if __name__ == "__main__":
