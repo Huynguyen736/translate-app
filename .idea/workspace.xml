@@ -4,17 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7871247b-f956-4968-8f23-207407f19bb0" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Annotation 2024-08-18 230105.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Annotation 2024-08-18 230220.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/MainControl.py" beforeDir="false" afterPath="$PROJECT_DIR$/controller/MainControl.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/louder.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mic (2).png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/search.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tab.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/view2.py (day la uipage1)" beforeDir="false" afterPath="$PROJECT_DIR$/uipage1.py" afterDir="false" />
-    </list>
+    <list default="true" id="7871247b-f956-4968-8f23-207407f19bb0" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -52,7 +42,7 @@
     "Python.main.executor": "Run",
     "Python.view.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Merging master",
+    "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "C:/Users/son13/PyCharmIndependentProjects/TranslationApp",
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
