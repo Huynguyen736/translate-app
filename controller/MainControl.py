@@ -48,6 +48,7 @@ class AppFunction:
 		wgs.dich.clicked.connect(lambda: self.transFunc())  # Translate when clicked the button using translate(<text>, <lang>)
 		wgs.copy1.clicked.connect(lambda: self.copyText()) # Connect to copy button
 		# wgs.reverse.clicked.connect(lambda: self.swap_language())
+		wgs.copy2.clicked.connect(lambda: self.request_data())
 		
 
 	# Initialization variable
@@ -76,26 +77,7 @@ class AppFunction:
 		self.player.setMedia(QtMultimedia.QMediaContent(QtCore.QUrl.fromLocalFile("output.wav")))
 		self.player.play()
 
-class Page_2_Function:
-	def __init__(self, UI) -> None:
-		global wgs
-		wgs = UI
 
-		
-	def output_data(self):
-		response_data = request_mw(wgs.entertext.toPlainText())
-		headword = data_filter(response_data[0], "hwi", "hw")
-		grammatical_function = data_filter(response_data[0], "fl")
-		word_definition = data_filter(response_data[0], "hwi", "shortdef")
-		ipa_pronunciation = data_filter(response_data[0], "hwi", "prs", 0, "mw")
-		wgs.hello.setText(headword)
-		wgs.noun.setText(grammatical_function)
-		wgs.definition.setText(word_definition)
-		
-
-	def keyPressEvent(self, event):
-		if event.key() == Qt.Key_Return:
-			self.output_data()
 		
 		
 	
