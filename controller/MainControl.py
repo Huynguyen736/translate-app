@@ -4,14 +4,8 @@ from PyQt5.QtWidgets import QWidget
 from PyQt5 import QtMultimedia, QtCore
 import pyperclip
 from gtts import gTTS
-import os, sys
+import requests
 
-#import pydub
-#from pydub.playback import play
-#import time
-#import pygame
-#import wave
-#import pyaudio
 
 languagesCodes = {
 	"Tiếng Anh":"en",
@@ -29,21 +23,23 @@ class AppFunction:
 		self.widget = QWidget()
 		self.init_connect()
 		self.init_variable()
-		self.swap_language()
+		# self.swap_language()
 
-	#initialization connection
+	# Initialization connection
 	def init_connect(self):
-		wgs.loa.clicked.connect(lambda: self.audio_page_1())
-		wgs.pushButton.clicked.connect(lambda: self.transFunc())  #Translate when clicked the button using translate(<text>, <lang>)
-		wgs.copy.clicked.connect(lambda: self.copyText()) #Connect to copy button
-		wgs.reverse.clicked.connect(lambda: self.swap_language())
+		wgs.loa1.clicked.connect(lambda: self.audio_page_1())
+		wgs.dich.clicked.connect(lambda: self.transFunc())  # Translate when clicked the button using translate(<text>, <lang>)
+		wgs.copy1.clicked.connect(lambda: self.copyText()) # Connect to copy button
+		# wgs.reverse.clicked.connect(lambda: self.swap_language())
+		wgs.copy2.clicked.connect(lambda: self.request_data())
+		
 
-	#initialization variable
+	# Initialization variable
 	def init_variable(self):
 		self.player = QtMultimedia.QMediaPlayer()
 	
 	def transFunc(self):
-		text = trans.translate(wgs.textEdit.toPlainText(), dest=languagesCodes[wgs.comboBox_2.currentText()]).text # Translate and convert text
+		text = trans.translate(wgs.textEdit.toPlainText(), dest=languagesCodes[wgs.combobox.currentText()]).text # Translate and convert text
 		wgs.textEdit_2.setText(text)
 	
 	def copyText(self):
@@ -58,9 +54,24 @@ class AppFunction:
 		wgs.comboBox_2.setCurrentIndex(combobox_1_index)
 	
 	def audio_page_1(self):
-		tts_object = gTTS(text=wgs.textEdit.toPlainText(), lang=languagesCodes[wgs.comboBox.currentText()])
+		tts_object = gTTS(text=wgs.textEdit.toPlainText(), lang=languagesCodes[wgs.combobox.currentText()])
 		tts_object.save("output.wav")
-		# Audio playback (didn't work)
+		# Audio playback
 		self.player.setMedia(QtMultimedia.QMediaContent(QtCore.QUrl.fromLocalFile("output.wav")))
 		self.player.play()
 
+	def request_data(self):
+		url = f'https://www.oxfordlearnersdictionaries.com/definition/english/hello_1'
+		headers = {
+			"Content-Type": "application/x-www-form-urlencoded",
+			"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36",
+			"Pragma": "no-cache",
+			"Accept": "*/*"
+			}
+		response = requests.get(url, headers=headers)
+		if response.status_code == 200:
+			with open('tra_tu.txt', 'wb') as f:
+				f.write(response.text.encode('utf-8')) # Vì cái requests data quá dài nên anh dùng ghi file nhé
+		
+		# Đọc input
+		
