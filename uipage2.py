@@ -9,7 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from view2 import Ui_TranslateApp
+from uipage1 import Ui_TranslateApp
 
 class Ui_TranslateApp2(object):
     def openWindow2(self):
