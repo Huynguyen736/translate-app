@@ -2,6 +2,7 @@ from googletrans import Translator
 from PyQt5.QtWidgets import QMessageBox
 from PyQt5.QtWidgets import QWidget
 from PyQt5 import QtMultimedia, QtCore
+from PyQt5.QtCore import Qt
 import pyperclip
 from gtts import gTTS
 import requests
@@ -15,6 +16,22 @@ languagesCodes = {
 	"Tiếng Trung": "zh-cn"
 }
 trans = Translator()
+
+def request_mw(word):
+	api_key = "0ce55ada-b016-4ebc-bf6b-0ef882015e5b"
+	url = f"https://www.dictionaryapi.com/api/v3/references/collegiate/json/{word}?key={api_key}"
+	response = requests.get(url)
+	if response.status_code == 200:
+		return response.json()
+	else:
+		return None
+def data_filter(data, *keys):
+	for key in keys:
+		if isinstance(data, dict) and key in data:
+			data = data[key]
+		else:
+			return None
+	return data
 
 class AppFunction:
 	def __init__(self, UI) -> None:
@@ -59,14 +76,26 @@ class AppFunction:
 		self.player.setMedia(QtMultimedia.QMediaContent(QtCore.QUrl.fromLocalFile("output.wav")))
 		self.player.play()
 
-	def request_data(self):
-		api_key = "0ce55ada-b016-4ebc-bf6b-0ef882015e5b"
-		url = f"https://www.dictionaryapi.com/api/v3/references/collegiate/json/{word}?key={api_key}"
-		response = requests.get(url)
-		if response.status_code == 200:
-			return response.json()
-		else:
-			return None
+class Page_2_Function:
+	def __init__(self, UI) -> None:
+		global wgs
+		wgs = UI
+
 		
-		# Đọc input
+	def output_data(self):
+		response_data = request_mw(wgs.entertext.toPlainText())
+		headword = data_filter(response_data[0], "hwi", "hw")
+		grammatical_function = data_filter(response_data[0], "fl")
+		word_definition = data_filter(response_data[0], "hwi", "shortdef")
+		ipa_pronunciation = data_filter(response_data[0], "hwi", "prs", 0, "mw")
+		wgs.hello.setText(headword)
+		wgs.noun.setText(grammatical_function)
+		wgs.definition.setText(word_definition)
 		
+
+	def keyPressEvent(self, event):
+		if event.key() == Qt.Key_Return:
+			self.output_data()
+		
+		
+	
