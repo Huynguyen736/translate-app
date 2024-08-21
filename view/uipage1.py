@@ -111,11 +111,11 @@ class Ui_TranslateApp(object):
 "    border-radius: 15px\n"
 "}")
         self.combobox.setObjectName("combobox")
-        self.combobox.addItem("Tiếng Anh")
-        self.combobox.addItem("Tiếng Việt")
-        self.combobox.addItem("Tiếng Trung")
-        self.combobox.addItem("Tiếng Nhật")
-        self.combobox.addItem("Tiếng Hàn")
+        self.combobox.addItem("")
+        self.combobox.addItem("")
+        self.combobox.addItem("")
+        self.combobox.addItem("")
+        self.combobox.addItem("")
         self.loa2 = QtWidgets.QPushButton(self.centralwidget)
         self.loa2.setGeometry(QtCore.QRect(960, 600, 61, 51))
         self.loa2.setStyleSheet("QPushButton {\n"
@@ -201,7 +201,7 @@ class Ui_TranslateApp(object):
         self.combobox.setItemText(4, _translate("TranslateApp", "Tiếng Hàn"))
         self.page1.setText(_translate("TranslateApp", "1"))
         self.page2.setText(_translate("TranslateApp", "2"))
-from . import new_rc
+from . import new_rc   
 
 
 if __name__ == "__main__":

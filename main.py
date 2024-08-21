@@ -1,5 +1,5 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-from view.uipage1 import Ui_TranslateApp
+from view.view import Ui_TranslateApp
 from controller import AppFunction
 
 if __name__ == "__main__":

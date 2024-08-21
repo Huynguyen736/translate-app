@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'view.ui'
+# Form implementation generated from reading ui file 'view2.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.11
 #
@@ -9,9 +9,21 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from googletrans import LANGCODES, LANGUAGES
+from . uipage2 import Ui_TranslateApp2
 
 class Ui_TranslateApp(object):
+    def openWindow(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_TranslateApp2()
+        self.ui.setupUi(self.window)
+        self.window.show()
+
+    def openWindow2(self):
+        self.window2 = QtWidgets.QMainWindow()
+        self.ui = Ui_TranslateApp()
+        self.ui.setupUi(self.window2)
+        self.window2.show()
+
     def setupUi(self, TranslateApp):
         TranslateApp.setObjectName("TranslateApp")
         TranslateApp.resize(1280, 720)
@@ -27,7 +39,7 @@ class Ui_TranslateApp(object):
         self.centralwidget = QtWidgets.QWidget(TranslateApp)
         self.centralwidget.setObjectName("centralwidget")
         self.name = QtWidgets.QLabel(self.centralwidget)
-        self.name.setGeometry(QtCore.QRect(480, 20, 301, 61))
+        self.name.setGeometry(QtCore.QRect(500, -10, 331, 81))
         self.name.setBaseSize(QtCore.QSize(0, 0))
         font = QtGui.QFont()
         font.setFamily("Noto Sans Condensed")
@@ -43,7 +55,7 @@ class Ui_TranslateApp(object):
         self.name.setAlignment(QtCore.Qt.AlignCenter)
         self.name.setObjectName("name")
         self.textEdit = QtWidgets.QTextEdit(self.centralwidget)
-        self.textEdit.setGeometry(QtCore.QRect(40, 230, 561, 301))
+        self.textEdit.setGeometry(QtCore.QRect(180, 110, 851, 241))
         self.textEdit.setStyleSheet("QTextEdit {\n"
 "    border: 2px solid rgb(255, 255, 255); \n"
 "    border-radius: 20px;\n"
@@ -55,7 +67,7 @@ class Ui_TranslateApp(object):
         self.textEdit.setLineWrapMode(QtWidgets.QTextEdit.WidgetWidth)
         self.textEdit.setObjectName("textEdit")
         self.textEdit_2 = QtWidgets.QTextEdit(self.centralwidget)
-        self.textEdit_2.setGeometry(QtCore.QRect(680, 230, 561, 301))
+        self.textEdit_2.setGeometry(QtCore.QRect(180, 390, 851, 271))
         self.textEdit_2.setStyleSheet("QTextEdit {\n"
 "    border: 2px solid rgb(255, 255, 255); \n"
 "    border-radius: 20px;\n"
@@ -64,21 +76,9 @@ class Ui_TranslateApp(object):
 "")
         self.textEdit_2.setPlaceholderText("")
         self.textEdit_2.setObjectName("textEdit_2")
-        self.reverse = QtWidgets.QPushButton(self.centralwidget)
-        self.reverse.setGeometry(QtCore.QRect(600, 150, 81, 61))
-        self.reverse.setStyleSheet("QPushButton {\n"
-"    \n"
-"    border-image: url(:/new/sync (2).png);\n"
-"}\n"
-"QPushButton:hover {\n"
-"    \n"
-"    border-image: url(:/new/sync (2) - Copy.png);\n"
-"}")
-        self.reverse.setText("")
-        self.reverse.setObjectName("reverse")
-        self.loa = QtWidgets.QPushButton(self.centralwidget)
-        self.loa.setGeometry(QtCore.QRect(520, 460, 71, 61))
-        self.loa.setStyleSheet("QPushButton {\n"
+        self.loa1 = QtWidgets.QPushButton(self.centralwidget)
+        self.loa1.setGeometry(QtCore.QRect(960, 290, 61, 51))
+        self.loa1.setStyleSheet("QPushButton {\n"
 "    \n"
 "    border-image: url(:/new/louder.png);\n"
 "    background-color: rgb(255, 255, 255);\n"
@@ -87,11 +87,11 @@ class Ui_TranslateApp(object):
 "    \n"
 "    border-image: url(:/new/louder - Copy.png);\n"
 "}")
-        self.loa.setText("")
-        self.loa.setObjectName("loa")
-        self.copy = QtWidgets.QPushButton(self.centralwidget)
-        self.copy.setGeometry(QtCore.QRect(530, 240, 51, 51))
-        self.copy.setStyleSheet("QPushButton {\n"
+        self.loa1.setText("")
+        self.loa1.setObjectName("loa1")
+        self.copy2 = QtWidgets.QPushButton(self.centralwidget)
+        self.copy2.setGeometry(QtCore.QRect(910, 600, 51, 51))
+        self.copy2.setStyleSheet("QPushButton {\n"
 "    \n"
 "    border-image: url(:/new/copy.png);\n"
 "    background-color: rgb(255, 255, 255);\n"
@@ -100,63 +100,94 @@ class Ui_TranslateApp(object):
 "    \n"
 "    border-image: url(:/new/copy - Copy.png);\n"
 "}")
-        self.copy.setText("")
-        self.copy.setObjectName("copy")
-        self.menu = QtWidgets.QPushButton(self.centralwidget)
-        self.menu.setGeometry(QtCore.QRect(20, 10, 91, 71))
-        self.menu.setStyleSheet("QPushButton {\n"
-"    border-image: url(:/new/tab.png);\n"
+        self.copy2.setText("")
+        self.copy2.setObjectName("copy2")
+        self.dich = QtWidgets.QPushButton(self.centralwidget)
+        self.dich.setGeometry(QtCore.QRect(1080, 330, 171, 91))
+        font = QtGui.QFont()
+        font.setPointSize(29)
+        self.dich.setFont(font)
+        self.dich.setStyleSheet("background-color: rgb(74, 136, 199);")
+        self.dich.setObjectName("dich")
+        self.combobox = QtWidgets.QComboBox(self.centralwidget)
+        self.combobox.setGeometry(QtCore.QRect(1070, 210, 191, 51))
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(20)
+        font.setBold(True)
+        font.setWeight(75)
+        self.combobox.setFont(font)
+        self.combobox.setStyleSheet("QComboBox {\n"
+"    \n"
+"    background-color: rgb(74, 136, 199);\n"
+"    border-radius: 15px\n"
+"}")
+        self.combobox.setObjectName("combobox")
+        self.combobox.addItem("")
+        self.combobox.addItem("")
+        self.combobox.addItem("")
+        self.combobox.addItem("")
+        self.combobox.addItem("")
+        self.loa2 = QtWidgets.QPushButton(self.centralwidget)
+        self.loa2.setGeometry(QtCore.QRect(960, 600, 61, 51))
+        self.loa2.setStyleSheet("QPushButton {\n"
+"    \n"
+"    border-image: url(:/new/louder.png);\n"
+"    background-color: rgb(255, 255, 255);\n"
 "}\n"
 "QPushButton:hover {\n"
-"    background-color: rgb(200, 200, 200);\n"
+"    \n"
+"    border-image: url(:/new/louder - Copy.png);\n"
 "}")
-        self.menu.setText("")
-        self.menu.setObjectName("menu")
-        self.pushButton = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton.setGeometry(QtCore.QRect(550, 570, 171, 61))
+        self.loa2.setText("")
+        self.loa2.setObjectName("loa2")
+        self.line = QtWidgets.QFrame(self.centralwidget)
+        self.line.setGeometry(QtCore.QRect(110, 20, 51, 641))
+        self.line.setFrameShape(QtWidgets.QFrame.VLine)
+        self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line.setObjectName("line")
+        self.line_2 = QtWidgets.QFrame(self.centralwidget)
+        self.line_2.setGeometry(QtCore.QRect(-10, 360, 141, 20))
+        self.line_2.setFrameShape(QtWidgets.QFrame.HLine)
+        self.line_2.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line_2.setObjectName("line_2")
+        self.page1 = QtWidgets.QPushButton(self.centralwidget)
+        self.page1.setGeometry(QtCore.QRect(20, 140, 91, 91))
         font = QtGui.QFont()
-        font.setPointSize(22)
-        self.pushButton.setFont(font)
-        self.pushButton.setStyleSheet("background-color: rgb(74, 136, 199);")
-        self.pushButton.setObjectName("pushButton")
-        self.comboBox = QtWidgets.QComboBox(self.centralwidget)
-        self.comboBox.setGeometry(QtCore.QRect(220, 140, 161, 51))
-        font = QtGui.QFont()
-        font.setFamily("Arial")
-        font.setPointSize(20)
+        font.setFamily("Segoe UI Black")
+        font.setPointSize(42)
         font.setBold(True)
         font.setWeight(75)
-        self.comboBox.setFont(font)
-        self.comboBox.setStyleSheet("QComboBox {\n"
-"    \n"
-"    background-color: rgb(74, 136, 199);\n"
-"    border-radius: 15px\n"
-"}")
-        self.comboBox.setObjectName("comboBox")
-        self.comboBox.addItem("Tiếng Anh", "en")
-        self.comboBox.addItem("Tiếng Việt", "vi")
-        self.comboBox.addItem("Tiếng Trung", "zh-tw")
-        self.comboBox.addItem("Tiếng Nhật", "ja")
-        self.comboBox.addItem("Tiếng Hàn", "ko")
-        self.comboBox_2 = QtWidgets.QComboBox(self.centralwidget)
-        self.comboBox_2.setGeometry(QtCore.QRect(910, 140, 261, 51))
+        self.page1.setFont(font)
+        self.page1.setObjectName("page1")
+
+        self.page1.clicked.connect(self.openWindow2)
+
+        self.page2 = QtWidgets.QPushButton(self.centralwidget)
+        self.page2.setGeometry(QtCore.QRect(20, 480, 91, 91))
         font = QtGui.QFont()
-        font.setFamily("Arial")
-        font.setPointSize(20)
+        font.setFamily("Segoe UI Black")
+        font.setPointSize(42)
         font.setBold(True)
         font.setWeight(75)
-        self.comboBox_2.setFont(font)
-        self.comboBox_2.setStyleSheet("QComboBox {\n"
+        self.page2.setFont(font)
+        self.page2.setObjectName("page2")
+
+        self.page2.clicked.connect(self.openWindow)
+
+        self.copy1 = QtWidgets.QPushButton(self.centralwidget)
+        self.copy1.setGeometry(QtCore.QRect(910, 290, 51, 51))
+        self.copy1.setStyleSheet("QPushButton {\n"
 "    \n"
-"    background-color: rgb(74, 136, 199);\n"
-"    border-radius: 15px\n"
+"    border-image: url(:/new/copy.png);\n"
+"    background-color: rgb(255, 255, 255);\n"
+"}\n"
+"QPushButton:hover {\n"
+"    \n"
+"    border-image: url(:/new/copy - Copy.png);\n"
 "}")
-        self.comboBox_2.setObjectName("comboBox_2")
-        self.comboBox_2.addItem("Tiếng Anh", "en")
-        self.comboBox_2.addItem("Tiếng Việt", "vi")
-        self.comboBox_2.addItem("Tiếng Trung", "zh-tw")
-        self.comboBox_2.addItem("Tiếng Nhật", "ja")
-        self.comboBox_2.addItem("Tiếng Hàn", "ko")
+        self.copy1.setText("")
+        self.copy1.setObjectName("copy1")
         TranslateApp.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(TranslateApp)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1280, 21))
@@ -180,16 +211,22 @@ class Ui_TranslateApp(object):
 "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
         self.textEdit.setPlaceholderText(_translate("TranslateApp", "Enter text"))
-        self.pushButton.setText(_translate("TranslateApp", "Dịch"))
-        self.comboBox.setItemText(0, _translate("TranslateApp", "Tiếng Anh"))
-        self.comboBox.setItemText(1, _translate("TranslateApp", "Tiếng Việt"))
-        self.comboBox.setItemText(2, _translate("TranslateApp", "Tiếng Trung"))
-        self.comboBox.setItemText(3, _translate("TranslateApp", "Tiếng Nhật"))
-        self.comboBox.setItemText(4, _translate("TranslateApp", "Tiếng Hàn"))
-        self.comboBox_2.setItemText(0, _translate("TranslateApp", "Tiếng Anh"))
-        self.comboBox_2.setItemText(1, _translate("TranslateApp", "Tiếng Việt"))
-        self.comboBox_2.setItemText(2, _translate("TranslateApp", "Tiếng Trung"))
-        self.comboBox_2.setItemText(3, _translate("TranslateApp", "Tiếng Nhật"))
-        self.comboBox_2.setItemText(4, _translate("TranslateApp", "Tiếng Hàn"))
+        self.dich.setText(_translate("TranslateApp", "Dịch"))
+        self.combobox.setItemText(0, _translate("TranslateApp", "Tiếng Anh"))
+        self.combobox.setItemText(1, _translate("TranslateApp", "Tiếng Việt"))
+        self.combobox.setItemText(2, _translate("TranslateApp", "Tiếng Trung"))
+        self.combobox.setItemText(3, _translate("TranslateApp", "Tiếng Nhật"))
+        self.combobox.setItemText(4, _translate("TranslateApp", "Tiếng Hàn"))
+        self.page1.setText(_translate("TranslateApp", "1"))
+        self.page2.setText(_translate("TranslateApp", "2"))
+from . import new_rc   
 
-from . import new_rc
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    TranslateApp = QtWidgets.QMainWindow()
+    ui = Ui_TranslateApp()
+    ui.setupUi(TranslateApp)
+    TranslateApp.show()
+    sys.exit(app.exec_())

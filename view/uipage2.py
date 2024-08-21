@@ -9,9 +9,15 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from . uipage1 import Ui_TranslateApp
 
+class Ui_TranslateApp2(object):
+    def openWindow2(self):
+        self.window2 = QtWidgets.QMainWindow()
+        self.ui = Ui_TranslateApp()
+        self.ui.setupUi(self.window2)
+        self.window2.show()
 
-class Ui_TranslateApp(object):
     def setupUi(self, TranslateApp):
         TranslateApp.setObjectName("TranslateApp")
         TranslateApp.resize(1292, 720)
@@ -33,14 +39,28 @@ class Ui_TranslateApp(object):
         self.entertext.setObjectName("entertext")
         self.find = QtWidgets.QPushButton(self.centralwidget)
         self.find.setGeometry(QtCore.QRect(180, 30, 51, 41))
-        self.find.setStyleSheet("border-image: url(:/resource/drive-download-20240818T010916Z-001/search.png);\n"
-"background-color: rgb(228, 239, 251);")
+        self.find.setStyleSheet("QPushButton {\n"
+"    \n"
+"    background-color: rgb(228, 239, 251);\n"
+"    border-image: url(:/resource/drive-download-20240818T010916Z-001/search.png);\n"
+"}\n"
+"QPushButton:hover {\n"
+"    \n"
+"    border-image: url(:/resource/drive-download-20240818T010916Z-001/search - Copy.png);\n"
+"}")
         self.find.setText("")
         self.find.setObjectName("find")
         self.micro = QtWidgets.QPushButton(self.centralwidget)
         self.micro.setGeometry(QtCore.QRect(1190, 32, 41, 41))
-        self.micro.setStyleSheet("border-image: url(:/resource/drive-download-20240818T010916Z-001/mic (2).png);\n"
-"background-color: rgb(228, 239, 251);")
+        self.micro.setStyleSheet("QPushButton {\n"
+"    \n"
+"    background-color: rgb(228, 239, 251);\n"
+"    border-image: url(:/resource/drive-download-20240818T010916Z-001/mic (2).png);\n"
+"}\n"
+"QPushButton:hover {\n"
+"    \n"
+"    border-image: url(:/resource/drive-download-20240818T010916Z-001/mic (2) - Copy.png);\n"
+"}")
         self.micro.setText("")
         self.micro.setObjectName("micro")
         self.hello = QtWidgets.QLabel(self.centralwidget)
@@ -60,11 +80,11 @@ class Ui_TranslateApp(object):
         font.setItalic(True)
         self.noun.setFont(font)
         self.noun.setObjectName("noun")
-        self.line = QtWidgets.QFrame(self.centralwidget)
-        self.line.setGeometry(QtCore.QRect(170, 180, 1101, 16))
-        self.line.setFrameShape(QtWidgets.QFrame.HLine)
-        self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
-        self.line.setObjectName("line")
+        self.line_3 = QtWidgets.QFrame(self.centralwidget)
+        self.line_3.setGeometry(QtCore.QRect(170, 180, 1101, 16))
+        self.line_3.setFrameShape(QtWidgets.QFrame.HLine)
+        self.line_3.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line_3.setObjectName("line_3")
         self.level = QtWidgets.QLabel(self.centralwidget)
         self.level.setGeometry(QtCore.QRect(170, 200, 101, 41))
         font = QtGui.QFont()
@@ -87,8 +107,14 @@ class Ui_TranslateApp(object):
         self.us.setFont(font)
         self.us.setObjectName("us")
         self.ukloa = QtWidgets.QPushButton(self.centralwidget)
-        self.ukloa.setGeometry(QtCore.QRect(230, 244, 51, 41))
-        self.ukloa.setStyleSheet("border-image: url(:/resource/drive-download-20240818T010916Z-001/Annotation 2024-08-18 230220.png);")
+        self.ukloa.setGeometry(QtCore.QRect(230, 244, 41, 41))
+        self.ukloa.setStyleSheet("QPushButton {\n"
+"    \n"
+"    border-image: url(:/resource/drive-download-20240818T010916Z-001/loa_xanh.png);\n"
+"}\n"
+"QPushButton:hover {\n"
+"    border-image: url(:/resource/drive-download-20240818T010916Z-001/loa_xanh copy.png);\n"
+"}")
         self.ukloa.setText("")
         self.ukloa.setObjectName("ukloa")
         self.pronon1 = QtWidgets.QLabel(self.centralwidget)
@@ -255,16 +281,16 @@ class Ui_TranslateApp(object):
         font.setPointSize(19)
         self.antext_2.setFont(font)
         self.antext_2.setObjectName("antext_2")
+        self.line = QtWidgets.QFrame(self.centralwidget)
+        self.line.setGeometry(QtCore.QRect(110, 20, 51, 641))
+        self.line.setFrameShape(QtWidgets.QFrame.VLine)
+        self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line.setObjectName("line")
         self.line_2 = QtWidgets.QFrame(self.centralwidget)
-        self.line_2.setGeometry(QtCore.QRect(110, 20, 51, 641))
-        self.line_2.setFrameShape(QtWidgets.QFrame.VLine)
+        self.line_2.setGeometry(QtCore.QRect(-10, 360, 141, 20))
+        self.line_2.setFrameShape(QtWidgets.QFrame.HLine)
         self.line_2.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line_2.setObjectName("line_2")
-        self.line_3 = QtWidgets.QFrame(self.centralwidget)
-        self.line_3.setGeometry(QtCore.QRect(-10, 360, 141, 20))
-        self.line_3.setFrameShape(QtWidgets.QFrame.HLine)
-        self.line_3.setFrameShadow(QtWidgets.QFrame.Sunken)
-        self.line_3.setObjectName("line_3")
         self.page1 = QtWidgets.QPushButton(self.centralwidget)
         self.page1.setGeometry(QtCore.QRect(20, 140, 91, 91))
         font = QtGui.QFont()
@@ -274,6 +300,9 @@ class Ui_TranslateApp(object):
         font.setWeight(75)
         self.page1.setFont(font)
         self.page1.setObjectName("page1")
+
+        self.page1.clicked.connect(self.openWindow2)
+
         self.page2 = QtWidgets.QPushButton(self.centralwidget)
         self.page2.setGeometry(QtCore.QRect(20, 480, 91, 91))
         font = QtGui.QFont()
@@ -285,7 +314,14 @@ class Ui_TranslateApp(object):
         self.page2.setObjectName("page2")
         self.usloa = QtWidgets.QPushButton(self.centralwidget)
         self.usloa.setGeometry(QtCore.QRect(230, 290, 41, 31))
-        self.usloa.setStyleSheet("border-image: url(:/resource/drive-download-20240818T010916Z-001/Annotation 2024-08-18 230105.png);")
+        self.usloa.setStyleSheet("QPushButton {\n"
+"    \n"
+"    border-image: url(:/resource/drive-download-20240818T010916Z-001/loa_do.png);\n"
+"}\n"
+"QPushButton:hover {\n"
+"    \n"
+"    border-image: url(:/resource/drive-download-20240818T010916Z-001/loa_do copy.png);\n"
+"}")
         self.usloa.setText("")
         self.usloa.setObjectName("usloa")
         self.entertext.raise_()
@@ -293,7 +329,7 @@ class Ui_TranslateApp(object):
         self.micro.raise_()
         self.hello.raise_()
         self.noun.raise_()
-        self.line.raise_()
+        self.line_3.raise_()
         self.uk.raise_()
         self.us.raise_()
         self.ukloa.raise_()
@@ -322,8 +358,8 @@ class Ui_TranslateApp(object):
         self.circle2.raise_()
         self.circle1.raise_()
         self.example.raise_()
+        self.line.raise_()
         self.line_2.raise_()
-        self.line_3.raise_()
         self.usloa.raise_()
         TranslateApp.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(TranslateApp)
@@ -370,7 +406,6 @@ class Ui_TranslateApp(object):
         self.antext_2.setText(_translate("TranslateApp", "<html><head/><body><p><span style=\" font-size:14pt; text-decoration: underline; color:#093a7c;\">solong</span></p></body></html>"))
         self.page1.setText(_translate("TranslateApp", "1"))
         self.page2.setText(_translate("TranslateApp", "2"))
-
 from . import resource_rc
 
 
@@ -378,7 +413,7 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     TranslateApp = QtWidgets.QMainWindow()
-    ui = Ui_TranslateApp()
+    ui = Ui_TranslateApp2()
     ui.setupUi(TranslateApp)
     TranslateApp.show()
     sys.exit(app.exec_())
