@@ -6,6 +6,8 @@ from PyQt5.QtCore import Qt
 import pyperclip
 from gtts import gTTS
 import requests
+import os, time
+import threading
 import json
 
 
@@ -34,15 +36,17 @@ class AppFunction:
 		self.widget = QWidget()
 		self.init_connect()
 		self.init_variable()
+		self.output_mw_data()
 		# self.swap_language()
 
 	# Initialization connection
 	def init_connect(self):
-		wgs.loa1.clicked.connect(lambda: self.audio_page_1())
 		wgs.dich.clicked.connect(lambda: self.transFunc())  # Translate when clicked the button using translate(<text>, <lang>)
 		wgs.copy1.clicked.connect(lambda: self.copyText()) # Connect to copy button
 		# wgs.reverse.clicked.connect(lambda: self.swap_language())
 		wgs.copy2.clicked.connect(lambda: self.request_data())
+		wgs.loa1.clicked.connect(lambda: self.audio_page_1())
+		#wgs.find.clicked.connect(lambda: self.find_pressed())
 		
 
 	# Initialization variable
@@ -65,12 +69,20 @@ class AppFunction:
 		wgs.comboBox_2.setCurrentIndex(combobox_1_index)
 	
 	def audio_page_1(self):
-		tts_object = gTTS(text=wgs.textEdit.toPlainText(), lang=languagesCodes[wgs.combobox.currentText()])
-		tts_object.save("output.wav")
-		# Audio playback
-		self.player.setMedia(QtMultimedia.QMediaContent(QtCore.QUrl.fromLocalFile("output.wav")))
-		self.player.play()
+		try:
+			ptext = wgs.textEdit.toPlainText()
+			print(ptext)
+			tts_object = gTTS(text=ptext, lang=languagesCodes[wgs.combobox.currentText()])
+			tts_object.save("output.wav")
+			# Audio playback
+			self.player.setMedia(QtMultimedia.QMediaContent(QtCore.QUrl.fromLocalFile("output.wav")))
+			self.player.play()
+		except:
+			os.remove("output.wav")
+			time.sleep(0.01)
+			self.audio_page_1()
 
+		
 	def request_data(self):
 		url = f'https://www.oxfordlearnersdictionaries.com/definition/english/hello_1'
 		headers = {
@@ -83,10 +95,6 @@ class AppFunction:
 		if response.status_code == 200:
 			with open('tra_tu.txt', 'wb') as f:
 				f.write(response.text.encode('utf-8'))  # Vì cái requests data quá dài nên anh dùng ghi file nhé
-class Page_2_Function:
-	def __init__(self, UI) -> None:
-		global wgs
-		wgs = UI
 
 	def output_mw_data(self):
 		response_data = request_mw(wgs.entertext.toPlainText())
@@ -95,10 +103,9 @@ class Page_2_Function:
 		word_definition = response_data[0]["hwi"]["shortdef"]
 		ipa_pronunciation = response_data[0]["hwi"]["prs"][0]["mw"]
 		#example_usage = response_data[0]["dt"]["vis"]
-		#wgs.hello.setText(headword)
-		#wgs.noun.setText(grammatical_function)
-		#wgs.definition.setText(word_definition)
+		wgs.hello.setText(headword)
+		wgs.noun.setText(grammatical_function)
+		wgs.definition.setText(word_definition)
 
-	def keyPressEvent(self, event):
-		if event.key() == Qt.Key_Return:
-			pass
+	def find_pressed(self):
+		self.output_mw_data()
