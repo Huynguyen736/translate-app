@@ -30,8 +30,10 @@ class AppFunction:
 		wgs.loa1.clicked.connect(lambda: self.audio_page_1())
 		wgs.dich.clicked.connect(lambda: self.transFunc())  # Translate when clicked the button using translate(<text>, <lang>)
 		wgs.copy1.clicked.connect(lambda: self.copyText()) # Connect to copy button
+		wgs.copy2.clicked.connect(lambda: self.copyText2())
 		# wgs.reverse.clicked.connect(lambda: self.swap_language())
 		wgs.copy2.clicked.connect(lambda: self.request_data())
+	
 		
 
 	# Initialization variable
@@ -46,7 +48,10 @@ class AppFunction:
 		pyperclip.copy(wgs.textEdit.toPlainText())
 		QMessageBox.information(self.widget, "Notice", "Copied!") #QMessageBox first arg must be related to QWidget
 		#Alert when copy
-	
+	def copyText2(self):
+		pyperclip.copy(wgs.textEdit_2.toPlainText())
+		QMessageBox.information(self.widget, "Notice", "Copied!") #QMessageBox first arg must be related to QWidget
+		#Alert when copy
 	def swap_language(self):
 		combobox_1_index = wgs.comboBox.currentIndex()
 		combobox_2_index = wgs.comboBox_2.currentIndex()
