@@ -10,8 +10,10 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from uipage2 import Ui_TranslateApp2
+import time
 
 class Ui_TranslateApp(object):
+        
     def openWindow(self):
         self.window = QtWidgets.QMainWindow()
         self.ui = Ui_TranslateApp2()
@@ -219,7 +221,7 @@ class Ui_TranslateApp(object):
         self.combobox.setItemText(4, _translate("TranslateApp", "Tiếng Hàn"))
         self.page1.setText(_translate("TranslateApp", "1"))
         self.page2.setText(_translate("TranslateApp", "2"))
-import new_rc   
+from view import new_rc
 
 
 if __name__ == "__main__":

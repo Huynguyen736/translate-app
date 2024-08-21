@@ -6,6 +6,7 @@ from PyQt5.QtCore import Qt
 import pyperclip
 from gtts import gTTS
 import requests
+import json
 
 
 languagesCodes = {
@@ -25,13 +26,6 @@ def request_mw(word):
 		return response.json()
 	else:
 		return None
-def data_filter(data, *keys):
-	for key in keys:
-		if isinstance(data, dict) and key in data:
-			data = data[key]
-		else:
-			return None
-	return data
 
 class AppFunction:
 	def __init__(self, UI) -> None:
@@ -77,7 +71,34 @@ class AppFunction:
 		self.player.setMedia(QtMultimedia.QMediaContent(QtCore.QUrl.fromLocalFile("output.wav")))
 		self.player.play()
 
+	def request_data(self):
+		url = f'https://www.oxfordlearnersdictionaries.com/definition/english/hello_1'
+		headers = {
+			"Content-Type": "application/x-www-form-urlencoded",
+			"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36",
+			"Pragma": "no-cache",
+			"Accept": "*/*"
+		}
+		response = requests.get(url, headers=headers)
+		if response.status_code == 200:
+			with open('tra_tu.txt', 'wb') as f:
+				f.write(response.text.encode('utf-8'))  # Vì cái requests data quá dài nên anh dùng ghi file nhé
+class Page_2_Function:
+	def __init__(self, UI) -> None:
+		global wgs
+		wgs = UI
 
-		
-		
-	
+	def output_mw_data(self):
+		response_data = request_mw(wgs.entertext.toPlainText())
+		headword = wgs.entertext.toPlainText()
+		grammatical_function = response_data[0]["fl"]
+		word_definition = response_data[0]["hwi"]["shortdef"]
+		ipa_pronunciation = response_data[0]["hwi"]["prs"][0]["mw"]
+		#example_usage = response_data[0]["dt"]["vis"]
+		#wgs.hello.setText(headword)
+		#wgs.noun.setText(grammatical_function)
+		#wgs.definition.setText(word_definition)
+
+	def keyPressEvent(self, event):
+		if event.key() == Qt.Key_Return:
+			pass
