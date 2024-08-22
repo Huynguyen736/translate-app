@@ -47,7 +47,8 @@ class AppFunction:
 		# wgs.reverse.clicked.connect(lambda: self.swap_language())
 		wgs.copy2.clicked.connect(lambda: self.request_data())
 		wgs.loa1.clicked.connect(lambda: self.audio_page_1())
-		#wgs.find.clicked.connect(lambda: self.find_pressed())
+	
+	#wgs.find.clicked.connect(lambda: self.find_pressed())
 	
 
 	# Initialization variable
