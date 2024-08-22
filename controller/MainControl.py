@@ -17,9 +17,11 @@ languagesCodes = {
 trans = Translator()
 
 class AppFunction:
-	def __init__(self, UI) -> None:
+	def __init__(self, UI, UI2) -> None:
+		global wgs2
 		global wgs
 		wgs = UI
+		wgs2 = UI2
 		self.widget = QWidget()
 		self.init_connect()
 		self.init_variable()
@@ -33,7 +35,7 @@ class AppFunction:
 		wgs.copy2.clicked.connect(lambda: self.copyText2())
 		# wgs.reverse.clicked.connect(lambda: self.swap_language())
 		wgs.copy2.clicked.connect(lambda: self.request_data())
-	
+		
 		
 
 	# Initialization variable
@@ -43,7 +45,7 @@ class AppFunction:
 	def transFunc(self):
 		text = trans.translate(wgs.textEdit.toPlainText(), dest=languagesCodes[wgs.combobox.currentText()]).text # Translate and convert text
 		wgs.textEdit_2.setText(text)
-	
+
 	def copyText(self):
 		pyperclip.copy(wgs.textEdit.toPlainText())
 		QMessageBox.information(self.widget, "Notice", "Copied!") #QMessageBox first arg must be related to QWidget

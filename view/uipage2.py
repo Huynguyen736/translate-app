@@ -17,7 +17,7 @@ class Ui_TranslateApp2(object):
         self.ui = Ui_TranslateApp()
         self.ui.setupUi(self.window2)
         self.window2.show()
-
+        
     def setupUi(self, TranslateApp):
         TranslateApp.setObjectName("TranslateApp")
         TranslateApp.resize(1292, 720)
