@@ -23,23 +23,20 @@ class AppFunction:
 		self.widget = QWidget()
 		self.init_connect()
 		self.init_variable()
-		# self.swap_language()
 
 	# Initialization connection
 	def init_connect(self):
 		wgs.loa1.clicked.connect(lambda: self.audio_page_1())
 		wgs.dich.clicked.connect(lambda: self.transFunc())  # Translate when clicked the button using translate(<text>, <lang>)
 		wgs.copy1.clicked.connect(lambda: self.copyText()) # Connect to copy button
-		wgs.copy2.clicked.connect(lambda: self.copyText2())
-		# wgs.reverse.clicked.connect(lambda: self.swap_language())
+		wgs.copy2.clicked.connect(lambda: self.copyText())
 		wgs.copy2.clicked.connect(lambda: self.request_data())
 	
-		
-
 	# Initialization variable
 	def init_variable(self):
 		self.player = QtMultimedia.QMediaPlayer()
 	
+	# Function define
 	def transFunc(self):
 		text = trans.translate(wgs.textEdit.toPlainText(), dest=languagesCodes[wgs.combobox.currentText()]).text # Translate and convert text
 		wgs.textEdit_2.setText(text)
@@ -48,15 +45,6 @@ class AppFunction:
 		pyperclip.copy(wgs.textEdit.toPlainText())
 		QMessageBox.information(self.widget, "Notice", "Copied!") #QMessageBox first arg must be related to QWidget
 		#Alert when copy
-	def copyText2(self):
-		pyperclip.copy(wgs.textEdit_2.toPlainText())
-		QMessageBox.information(self.widget, "Notice", "Copied!") #QMessageBox first arg must be related to QWidget
-		#Alert when copy
-	def swap_language(self):
-		combobox_1_index = wgs.comboBox.currentIndex()
-		combobox_2_index = wgs.comboBox_2.currentIndex()
-		wgs.comboBox.setCurrentIndex(combobox_2_index)
-		wgs.comboBox_2.setCurrentIndex(combobox_1_index)
 	
 	def audio_page_1(self):
 		tts_object = gTTS(text=wgs.textEdit.toPlainText(), lang=languagesCodes[wgs.combobox.currentText()])

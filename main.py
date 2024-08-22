@@ -5,9 +5,7 @@ from controller import AppFunction
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    TranslateApp = QtWidgets.QMainWindow()
     ui = Ui_TranslateApp()
-    ui.setupUi(TranslateApp)
-    AppFunction(ui)
-    TranslateApp.show()
+    AppFunction(ui.ui)
+    ui.show()
     sys.exit(app.exec_())
