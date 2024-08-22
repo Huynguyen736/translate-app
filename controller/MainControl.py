@@ -2,14 +2,10 @@ from googletrans import Translator
 from PyQt5.QtWidgets import QMessageBox
 from PyQt5.QtWidgets import QWidget
 from PyQt5 import QtMultimedia, QtCore
-from PyQt5.QtCore import Qt
 import pyperclip
 from gtts import gTTS
 import requests
-import os, time
-import threading
-import json
-
+import os, tempfile, time
 
 languagesCodes = {
 	"Tiếng Anh":"en",
@@ -34,10 +30,9 @@ class AppFunction:
 		global wgs
 		wgs = UI
 		self.widget = QWidget()
+		self.player = QtMultimedia.QMediaPlayer()
 		self.init_connect()
-		self.init_variable()
 		self.output_mw_data()
-		# self.swap_language()
 
 	# Initialization connection
 	def init_connect(self):
@@ -48,11 +43,6 @@ class AppFunction:
 		wgs.copy2.clicked.connect(lambda: self.request_data())
 		wgs.find.clicked.connect(lambda: self.output_mw_data())
 		wgs.entertext.returnPressed.connect(lambda: self.output_mw_data())
-	
-
-	# Initialization variable
-	def init_variable(self):
-		self.player = QtMultimedia.QMediaPlayer()
 	
 	# Function define
 	def transFunc(self):
@@ -65,17 +55,15 @@ class AppFunction:
 		#Alert when copy
 	
 	def audio_page_1(self):
-		try:
-			ptext = wgs.textEdit.toPlainText()
-			print(ptext)
-			tts_object = gTTS(text=ptext, lang=languagesCodes[wgs.combobox.currentText()])
-			tts_object.save("output.wav")
-			# Audio playback
-			self.player.setMedia(QtMultimedia.QMediaContent(QtCore.QUrl.fromLocalFile("output.wav")))
-			self.player.play()
-		except:
-			os.remove("output.wav")
-			time.sleep(0.01)
+		self.player.setMedia(QtMultimedia.QMediaContent(QtCore.QUrl.fromLocalFile(None)))
+		ptext = wgs.textEdit.toPlainText()
+		tts_object = gTTS(text=ptext, lang=languagesCodes[wgs.combobox.currentText()])
+		audiopath = os.path.join(tempfile.gettempdir(), "output.wav")
+		tts_object.save(audiopath)
+		self.player.setMedia(QtMultimedia.QMediaContent(QtCore.QUrl.fromLocalFile(audiopath)))
+		self.player.play()
+		time.sleep(0.1)
+		os.remove(audiopath)
 
 		
 	def request_data(self):
@@ -96,14 +84,13 @@ class AppFunction:
 			res_data = request_mw(wgs.entertext.text())
 			headword = wgs.entertext.text()
 			grammatical_function = res_data[0]["fl"]
-			for definitions in res_data[0]["shortdef"]:
-				wgs.def_text.setText(definitions)
+			word_def = res_data[0]["shortdef"][0]
 			ipa_pronunciation = res_data[0]["hwi"]["prs"][0]["mw"]
 			#example_usage = res_text[0]["dt"]["vis"]
 			wgs.hello.setText(headword)
 			wgs.noun.setText(grammatical_function)
 			wgs.pronon_2.setText(ipa_pronunciation)
+			wgs.definition.setText(word_def)
 		except Exception as e:
 			print(e)
 		
-
