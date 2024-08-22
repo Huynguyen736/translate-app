@@ -46,7 +46,8 @@ class AppFunction:
 		wgs.copy1.clicked.connect(lambda: self.copyText()) # Connect to copy button
 		wgs.copy2.clicked.connect(lambda: self.copyText())
 		wgs.copy2.clicked.connect(lambda: self.request_data())
-		#wgs.find.clicked.connect(lambda: self.find_pressed())
+		wgs.find.clicked.connect(lambda: self.output_mw_data())
+		wgs.entertext.returnPressed.connect(lambda: self.output_mw_data())
 	
 
 	# Initialization variable
@@ -75,7 +76,6 @@ class AppFunction:
 		except:
 			os.remove("output.wav")
 			time.sleep(0.01)
-			self.audio_page_1()
 
 		
 	def request_data(self):
@@ -92,15 +92,18 @@ class AppFunction:
 				f.write(response.text.encode('utf-8'))  # Vì cái requests data quá dài nên anh dùng ghi file nhé
 
 	def output_mw_data(self):
-		response_data = request_mw(wgs.entertext.toPlainText())
-		headword = wgs.entertext.toPlainText()
-		grammatical_function = response_data[0]["fl"]
-		word_definition = response_data[0]["hwi"]["shortdef"]
-		ipa_pronunciation = response_data[0]["hwi"]["prs"][0]["mw"]
-		#example_usage = response_data[0]["dt"]["vis"]
-		wgs.hello.setText(headword)
-		wgs.noun.setText(grammatical_function)
-		wgs.definition.setText(word_definition)
+		try:
+			res_data = request_mw(wgs.entertext.text())
+			headword = wgs.entertext.text()
+			grammatical_function = res_data[0]["fl"]
+			for definitions in res_data[0]["shortdef"]:
+				wgs.def_text.setText(definitions)
+			ipa_pronunciation = res_data[0]["hwi"]["prs"][0]["mw"]
+			#example_usage = res_text[0]["dt"]["vis"]
+			wgs.hello.setText(headword)
+			wgs.noun.setText(grammatical_function)
+			wgs.pronon_2.setText(ipa_pronunciation)
+		except Exception as e:
+			print(e)
+		
 
-	def find_pressed(self):
-		self.output_mw_data()
