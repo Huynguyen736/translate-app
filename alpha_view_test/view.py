@@ -1,15 +1,14 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel, QPushButton, QStackedWidget, QDateTimeEdit, QMainWindow, QHBoxLayout
 from PyQt5 import QtCore, QtGui, QtWidgets
-from . uipage1 import Ui_Page1
-from . uipage2 import Ui_Page2
+from uipage1 import Ui_Page1
+from uipage2 import Ui_Page2
 
-class Ui_TranslateApp(QMainWindow):
+class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Countdown & Clock")
 
-        # Set property main windown
         self.setObjectName("Test")
         self.resize(1280, 720)
         self.setMinimumSize(QtCore.QSize(1, 1))
@@ -28,6 +27,11 @@ class Ui_TranslateApp(QMainWindow):
         self.setCentralWidget(self.central_widget)
         self.central_widget.setLayout(self.main_layout)
 
+        # Left bar layout (vertical)
+        # self.left_bar_layout = QVBoxLayout()
+        # self.left_bar_layout.setAlignment(QtCore.Qt.AlignmentFlag.AlignJustify)
+        # self.main_layout.addLayout(self.left_bar_layout)
+
         # Stacked widget (main content)
         self.stacked_widget = QStackedWidget()
         self.main_layout.addWidget(self.stacked_widget)
@@ -45,26 +49,29 @@ class Ui_TranslateApp(QMainWindow):
         self.stacked_widget.addWidget(self.page2_widget)
 
         # Navigation buttons
+        font_b = QtGui.QFont()
+        font_b.setFamily("Segoe UI Black")
+        font_b.setPointSize(42)
+        font_b.setBold(True)
+        font_b.setWeight(75)
+        self.page1_b = QtWidgets.QPushButton("1")
+        self.page1_b.setFont(font_b)
+        self.page1_b.setObjectName("page1")
+        self.page2_b = QtWidgets.QPushButton("2")
+        self.page2_b.setFont(font_b)
+        self.page2_b.setObjectName("page2")
+
         self.page1.page2.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(1))
         self.page2.page1.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(0))
 
-        self.ui = merge_property(self.page1, self.page2)
+        # self.left_bar_layout.addWidget(self.page1_b)
+        # self.left_bar_layout.addWidget(self.page2_b)
 
-class merge_property:
-    def __init__(self, page1, page2):
-        self.page1 = page1
-        self.page2 = page2
-
-    def __getattr__(self, name):
-        # Try to get the attribute from page1 first
-        try:
-            return getattr(self.page1, name)
-        except AttributeError:
-            # If not found in page1, try page2
-            return getattr(self.page2, name)
+        # Add spacer to push buttons to the top (optional)
+        # self.left_bar_layout.addStretch()
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    window = Ui_TranslateApp()
+    window = MainWindow()
     window.show()
     sys.exit(app.exec_())

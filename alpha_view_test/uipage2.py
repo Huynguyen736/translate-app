@@ -394,7 +394,7 @@ class Ui_Page2(object):
         self.antext_2.setText(_translate("TranslateApp", "<html><head/><body><p><span style=\" font-size:14pt; text-decoration: underline; color:#093a7c;\">solong</span></p></body></html>"))
         self.page1.setText(_translate("TranslateApp", "1"))
         self.page2.setText(_translate("TranslateApp", "2"))
-from . import resource_rc
+import resource_rc
 
 
 if __name__ == "__main__":

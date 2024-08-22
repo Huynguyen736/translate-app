@@ -15,33 +15,33 @@ languagesCodes = {
 	"Tiếng Trung": "zh-cn"
 }
 trans = Translator()
+with open('tra_tu.txt', 'r', encoding='utf-8') as f:
+	file = f.readlines()
 
 class AppFunction:
-	def __init__(self, UI, UI2) -> None:
-		global wgs2
+	def __init__(self, UI) -> None:
 		global wgs
 		wgs = UI
-		wgs2 = UI2
 		self.widget = QWidget()
 		self.init_connect()
 		self.init_variable()
-		# self.swap_language()
 
 	# Initialization connection
 	def init_connect(self):
 		wgs.loa1.clicked.connect(lambda: self.audio_page_1())
 		wgs.dich.clicked.connect(lambda: self.transFunc())  # Translate when clicked the button using translate(<text>, <lang>)
 		wgs.copy1.clicked.connect(lambda: self.copyText()) # Connect to copy button
-		wgs.copy2.clicked.connect(lambda: self.copyText2())
-		# wgs.reverse.clicked.connect(lambda: self.swap_language())
+		wgs.copy2.clicked.connect(lambda: self.copyText())
 		wgs.copy2.clicked.connect(lambda: self.request_data())
-		
+		wgs.ukloa.clicked.connect(lambda event: self.query_audio())
+	
 		
 
 	# Initialization variable
 	def init_variable(self):
 		self.player = QtMultimedia.QMediaPlayer()
 	
+	# Function define
 	def transFunc(self):
 		text = trans.translate(wgs.textEdit.toPlainText(), dest=languagesCodes[wgs.combobox.currentText()]).text # Translate and convert text
 		wgs.textEdit_2.setText(text)
@@ -50,15 +50,6 @@ class AppFunction:
 		pyperclip.copy(wgs.textEdit.toPlainText())
 		QMessageBox.information(self.widget, "Notice", "Copied!") #QMessageBox first arg must be related to QWidget
 		#Alert when copy
-	def copyText2(self):
-		pyperclip.copy(wgs.textEdit_2.toPlainText())
-		QMessageBox.information(self.widget, "Notice", "Copied!") #QMessageBox first arg must be related to QWidget
-		#Alert when copy
-	def swap_language(self):
-		combobox_1_index = wgs.comboBox.currentIndex()
-		combobox_2_index = wgs.comboBox_2.currentIndex()
-		wgs.comboBox.setCurrentIndex(combobox_2_index)
-		wgs.comboBox_2.setCurrentIndex(combobox_1_index)
 	
 	def audio_page_1(self):
 		tts_object = gTTS(text=wgs.textEdit.toPlainText(), lang=languagesCodes[wgs.combobox.currentText()])
@@ -81,4 +72,24 @@ class AppFunction:
 				f.write(response.text.encode('utf-8')) # Vì cái requests data quá dài nên anh dùng ghi file nhé
 		
 		# Đọc input
+
+	def setWordData(word):
+		pass
+		
+	def query_audio(arg):
+		for line in file:
+			if '<div id="entryContent"' in line:
+				for i in [i for i in line.split() if "data-src-ogg" in i][:2]:
+					pass
+
+
+	def query_wordLevel():
+		data = file.readlines()
+		for line in data:
+			if '<div id="entryContent"' in line:
+				for i in line.split():
+					if "https://www.oxfordlearnersdictionaries.com/wordlists" in i:
+						wgs.level.setText(i[-9:-7].upper())
+	
+	
 		
