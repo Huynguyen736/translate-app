@@ -132,7 +132,7 @@ class Ui_Page2(object):
         self.def_text = QtWidgets.QLabel(self.centralwidget)
         self.def_text.setGeometry(QtCore.QRect(310, 320, 961, 41))
         font = QtGui.QFont()
-        font.setPointSize(19)
+        font.setPointSize(16)
         self.def_text.setFont(font)
         self.def_text.setObjectName("def_text")
         self.example = QtWidgets.QLabel(self.centralwidget)

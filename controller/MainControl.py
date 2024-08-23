@@ -21,7 +21,7 @@ def request_mw(word):
 	url = f"https://www.dictionaryapi.com/api/v3/references/collegiate/json/{word}?key={api_key}"
 	response = requests.get(url)
 	if response.status_code == 200:
-		return response.json()
+		return response.text
 	else:
 		return None
 
@@ -36,7 +36,7 @@ class AppFunction:
 
 	# Initialization connection
 	def init_connect(self):
-		wgs.loa1.clicked.connect(lambda: self.audio_page_1())
+		wgs.loa1.clicked.connect(lambda: self.audio_play_1())
 		wgs.dich.clicked.connect(lambda: self.transFunc())  # Translate when clicked the button using translate(<text>, <lang>)
 		wgs.copy1.clicked.connect(lambda: self.copyText()) # Connect to copy button
 		wgs.copy2.clicked.connect(lambda: self.copyText())
@@ -55,17 +55,26 @@ class AppFunction:
 		#Alert when copy
 	
 	def audio_page_1(self):
-		self.player.setMedia(QtMultimedia.QMediaContent(QtCore.QUrl.fromLocalFile(None)))
-		ptext = wgs.textEdit.toPlainText()
-		tts_object = gTTS(text=ptext, lang=languagesCodes[wgs.combobox.currentText()])
-		audiopath = os.path.join(tempfile.gettempdir(), "output.wav")
-		tts_object.save(audiopath)
-		self.player.setMedia(QtMultimedia.QMediaContent(QtCore.QUrl.fromLocalFile(audiopath)))
-		self.player.play()
-		time.sleep(0.1)
-		os.remove(audiopath)
+		global audiopath
+		try:
+			self.player.setMedia(QtMultimedia.QMediaContent(QtCore.QUrl.fromLocalFile(None)))
+			ptext = wgs.textEdit.toPlainText()
+			audiopath = os.path.join(tempfile.gettempdir(), "output.wav")
+			tts_object = gTTS(text=ptext, lang=languagesCodes[wgs.combobox.currentText()])
+			tts_object.save(audiopath)
+		except Exception as e:
+			print(e)
+	
+	def audio_play_1(self):
+		try:
+			self.audio_page_1()
+			self.player.setMedia(QtMultimedia.QMediaContent(QtCore.QUrl.fromLocalFile(audiopath)))
+			self.player.play()
+			time.sleep(0.05)
+			os.remove(audiopath)
+		except Exception as e:
+			print(e)
 
-		
 	def request_data(self):
 		url = f'https://www.oxfordlearnersdictionaries.com/definition/english/hello_1'
 		headers = {
@@ -89,8 +98,8 @@ class AppFunction:
 			#example_usage = res_text[0]["dt"]["vis"]
 			wgs.hello.setText(headword)
 			wgs.noun.setText(grammatical_function)
-			wgs.pronon_2.setText(ipa_pronunciation)
-			wgs.definition.setText(word_def)
+			wgs.pronon_2.setText(f"/{ipa_pronunciation}/")
+			wgs.def_text.setText(word_def)
 		except Exception as e:
 			print(e)
 		
