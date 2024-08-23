@@ -17,8 +17,8 @@ languagesCodes = {
 	"Tiếng Trung": "zh-cn"
 }
 trans = Translator()
-with open('tra_tu.txt', 'r', encoding='utf-8') as f:
-	file = f.readlines()
+# with open('tra_tu.txt', 'r', encoding='utf-8') as f:
+# 	file = f.readlines()
 
 def request_mw(word):
 	api_key = "0ce55ada-b016-4ebc-bf6b-0ef882015e5b"
@@ -47,6 +47,7 @@ class AppFunction:
 		wgs.copy2.clicked.connect(lambda: self.request_data())
 		wgs.ukloa.clicked.connect(lambda: self.play_UK_audio())
 		wgs.usloa.clicked.connect(lambda: self.play_US_audio())
+		wgs.find.clicked.connect(lambda: self.output_mw_data())
 	# Initialization variable
 	def init_variable(self):
 		self.player = QtMultimedia.QMediaPlayer()
@@ -90,6 +91,7 @@ class AppFunction:
 	def output_mw_data(self):
 		try:
 			res_data = request_mw(wgs.entertext.text())
+			self.request_data(wgs.entertext.text())
 			headword = wgs.entertext.text()
 			grammatical_function = res_data[0]["fl"]
 			word_def = res_data[0]["shortdef"][0]
@@ -99,12 +101,14 @@ class AppFunction:
 			wgs.noun.setText(grammatical_function)
 			wgs.pronon_2.setText(ipa_pronunciation)
 			wgs.definition.setText(word_def)
-			
+			wgs.level.setText("Level " + self.query_wordLevel())
 
 		except Exception as e:
 			print(e)
 
 	def query_audio(arg):
+		with open('tra_tu.txt', 'r', encoding='utf-8') as f:
+			file = f.readlines()
 		for line in file:
 			if '<div id="entryContent"' in line:
 				lst = [i for i in line.split() if "data-src-mp3" in i][:2]
@@ -147,9 +151,10 @@ class AppFunction:
 		while pygame.mixer.music.get_busy():
 			pygame.time.Clock().tick(10)
 
-	def query_wordLevel():
-		data = file.readlines()
-		for line in data:
+	def query_wordLevel(arg):
+		with open('tra_tu.txt', 'r', encoding='utf-8') as f:
+			file = f.readlines()
+		for line in file:
 			if '<div id="entryContent"' in line:
 				for i in line.split():
 					if "https://www.oxfordlearnersdictionaries.com/wordlists" in i:
