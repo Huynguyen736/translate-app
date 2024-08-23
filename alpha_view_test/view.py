@@ -27,11 +27,6 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(self.central_widget)
         self.central_widget.setLayout(self.main_layout)
 
-        # Left bar layout (vertical)
-        # self.left_bar_layout = QVBoxLayout()
-        # self.left_bar_layout.setAlignment(QtCore.Qt.AlignmentFlag.AlignJustify)
-        # self.main_layout.addLayout(self.left_bar_layout)
-
         # Stacked widget (main content)
         self.stacked_widget = QStackedWidget()
         self.main_layout.addWidget(self.stacked_widget)

@@ -6,8 +6,6 @@ import pyperclip
 from gtts import gTTS
 import requests
 import os, tempfile, time
-import pygame
-from io import BytesIO
 
 languagesCodes = {
 	"Tiếng Anh":"en",
@@ -17,8 +15,6 @@ languagesCodes = {
 	"Tiếng Trung": "zh-cn"
 }
 trans = Translator()
-# with open('tra_tu.txt', 'r', encoding='utf-8') as f:
-# 	file = f.readlines()
 
 def request_mw(word):
 	api_key = "0ce55ada-b016-4ebc-bf6b-0ef882015e5b"
@@ -34,9 +30,8 @@ class AppFunction:
 		global wgs
 		wgs = UI
 		self.widget = QWidget()
-		self.player = QtMultimedia.QMediaPlayer()
 		self.init_connect()
-		self.output_mw_data()
+		self.init_variable()
 
 	# Initialization connection
 	def init_connect(self):
@@ -48,6 +43,7 @@ class AppFunction:
 		wgs.ukloa.clicked.connect(lambda: self.play_UK_audio())
 		wgs.usloa.clicked.connect(lambda: self.play_US_audio())
 		wgs.find.clicked.connect(lambda: self.output_mw_data())
+
 	# Initialization variable
 	def init_variable(self):
 		self.player = QtMultimedia.QMediaPlayer()
@@ -73,7 +69,6 @@ class AppFunction:
 		time.sleep(0.1)
 		os.remove(audiopath)
 
-		
 	def request_data(self, word):
 		url = f'https://www.oxfordlearnersdictionaries.com/definition/english/{word}'
 		headers = {
@@ -86,8 +81,7 @@ class AppFunction:
 		if response.status_code == 200:
 			with open('tra_tu.txt', 'wb') as f:
 				f.write(response.text.encode('utf-8')) # Vì cái requests data quá dài nên anh dùng ghi file nhé
-		
-		# Đọc input
+
 	def output_mw_data(self):
 		try:
 			res_data = request_mw(wgs.entertext.text())
@@ -102,7 +96,6 @@ class AppFunction:
 			wgs.pronon_2.setText(ipa_pronunciation)
 			wgs.definition.setText(word_def)
 			wgs.level.setText("Level " + self.query_wordLevel())
-
 		except Exception as e:
 			print(e)
 
@@ -117,39 +110,13 @@ class AppFunction:
 	
 	def play_UK_audio(self):
 		url = self.query_audio()[0]
-		headers = {
-			'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-		}
-		response = requests.get(url, headers=headers)
-		audio_data = BytesIO(response.content)
-
-		# Khởi tạo pygame mixer
-		pygame.mixer.init()
-		# Tải âm thanh vào pygame
-		pygame.mixer.music.load(audio_data, 'mp3')
-		# Phát âm thanh
-		pygame.mixer.music.play()
-		# Đợi cho đến khi âm thanh kết thúc
-		while pygame.mixer.music.get_busy():
-			pygame.time.Clock().tick(10)
+		self.player.setMedia(QtMultimedia.QMediaContent(QtCore.QUrl(url)))
+		self.player.play()
 		
 	def play_US_audio(self):
 		url = self.query_audio()[1]
-		headers = {
-			'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-		}
-		response = requests.get(url, headers=headers)
-		audio_data = BytesIO(response.content)
-
-		# Khởi tạo pygame mixer
-		pygame.mixer.init()
-		# Tải âm thanh vào pygame
-		pygame.mixer.music.load(audio_data, 'mp3')
-		# Phát âm thanh
-		pygame.mixer.music.play()
-		# Đợi cho đến khi âm thanh kết thúc
-		while pygame.mixer.music.get_busy():
-			pygame.time.Clock().tick(10)
+		self.player.setMedia(QtMultimedia.QMediaContent(QtCore.QUrl(url)))
+		self.player.play()
 
 	def query_wordLevel(arg):
 		with open('tra_tu.txt', 'r', encoding='utf-8') as f:
