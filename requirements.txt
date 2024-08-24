@@ -3,4 +3,4 @@ requests
 googletrans == 3.1.0a0
 pyperclip
 gtts
-librosa
+pygame == 2.6.0
