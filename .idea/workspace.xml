@@ -5,10 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7871247b-f956-4968-8f23-207407f19bb0" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/controller/data_extract.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controller/MainControl.py" beforeDir="false" afterPath="$PROJECT_DIR$/controller/MainControl.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output.wav" beforeDir="false" afterPath="$PROJECT_DIR$/output.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tra_tu.txt" beforeDir="false" afterPath="$PROJECT_DIR$/tra_tu.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/view/uipage2.py" beforeDir="false" afterPath="$PROJECT_DIR$/view/uipage2.py" afterDir="false" />
     </list>
@@ -47,6 +46,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Python.MainControl.executor": "Run",
+    "Python.data_extract.executor": "Run",
     "Python.main.executor": "Run",
     "Python.request-data.executor": "Run",
     "Python.test2.executor": "Run",
@@ -54,7 +54,7 @@
     "Python.uipage2.executor": "Run",
     "Python.view.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Merging master",
+    "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "C:/Users/son13/PyCharmIndependentProjects/TranslationApp",
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
@@ -124,6 +124,11 @@
           <url>file://$PROJECT_DIR$/view/uipage2.py</url>
           <line>396</line>
           <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/../TranslationApp/request-data.py</url>
+          <line>19</line>
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -1,4 +1,4 @@
-from googletrans import Translator
+from googletrans import Translator, models
 from PyQt5.QtWidgets import QMessageBox
 from PyQt5.QtWidgets import QWidget
 from PyQt5 import QtMultimedia, QtCore
@@ -6,7 +6,8 @@ import pyperclip
 from gtts import gTTS
 import requests
 import os, tempfile, time
-import re
+import json
+from . import data_extract
 
 languagesCodes = {
 	"Tiếng Anh":"en",
@@ -17,14 +18,14 @@ languagesCodes = {
 }
 trans = Translator()
 
-def request_mw(word):
-	api_key = "0ce55ada-b016-4ebc-bf6b-0ef882015e5b"
-	url = f"https://www.dictionaryapi.com/api/v3/references/collegiate/json/{word}?key={api_key}"
-	response = requests.get(url)
-	if response.status_code == 200:
-		return response.json()
-	else:
-		return None
+#def request_mw(word):
+#	api_key = "0ce55ada-b016-4ebc-bf6b-0ef882015e5b"
+#	url = f"https://www.dictionaryapi.com/api/v3/references/collegiate/json/{word}?key={api_key}"
+#	response = requests.get(url)
+#	if response.status_code == 200:
+#		return response.json()
+#	else:
+#		return None
 
 class AppFunction:
 	def __init__(self, UI) -> None:
@@ -65,8 +66,10 @@ class AppFunction:
 		try:
 			self.player.setMedia(QtMultimedia.QMediaContent(QtCore.QUrl.fromLocalFile(None)))
 			ptext = wgs.textEdit.toPlainText()
+			detection = trans.detect(ptext)
+			lang = detection.lang
 			audiopath = os.path.join(tempfile.gettempdir(), "output.wav")
-			tts_object = gTTS(text=ptext, lang=languagesCodes[wgs.combobox.currentText()])
+			tts_object = gTTS(text=ptext, lang=lang)
 			tts_object.save(audiopath)
 		except Exception as e:
 			print(e)
@@ -76,8 +79,6 @@ class AppFunction:
 			self.audio_page_1()
 			self.player.setMedia(QtMultimedia.QMediaContent(QtCore.QUrl.fromLocalFile(audiopath)))
 			self.player.play()
-			time.sleep(0.05)
-			os.remove(audiopath)
 		except Exception as e:
 			print(e)
 
@@ -96,24 +97,41 @@ class AppFunction:
 
 	def output_mw_data(self):
 		try:
-			res_data = request_mw(wgs.entertext.text())
+			# Merriam response
+			result = data_extract.get_word_data(wgs.entertext.text())
+			# Oxford response
 			self.request_data(wgs.entertext.text())
-			headword = wgs.entertext.text()
-			grammatical_function = res_data[0]["fl"]
-			word_def = res_data[0]["shortdef"][0]
-			us_ipa_pronunciation = res_data[0]["hwi"]["prs"][0]["mw"]
-			example_1_raw = res_data[0]["dros"][0]["def"][0]["sseq"][0][0][1]["dt"][1][1][0]["t"]
-			example_1 = re.sub(r"{it}|{/it}", "", example_1_raw)
+			# Page 2 Objects
+			headword = result["word"]
+			grammatical_function = result["entries"][0]["functional_label"]
+			word_def = result["entries"][0]["definitions"][0]
+			us_ipa_pronunciation = result["entries"][0]["pronunciations"][0]
+			try:
+				example_1 = result["entries"][0]["examples"][0]
+				example_2 = result["entries"][0]["examples"][1]
+				example_3 = result["entries"][0]["examples"][2]
+			except:
+				pass
+			
+			# Output
+			wgs.example_text_2.setText(None)
+			wgs.example_text_3.setText(None)
 			wgs.hello.setText(headword)
 			wgs.noun.setText(grammatical_function)
-			#wgs.pronon_1.setText(f"/{uk_ipa_pronunciation}/")
 			wgs.pronon_2.setText(f"/{us_ipa_pronunciation}/")
-			wgs.def_text.setText(word_def)
 			wgs.example_text.setText(example_1)
+			wgs.example_text_2.setText(example_2)
+			wgs.example_text_3.setText(example_3)
+			if example_2 == None:
+				wgs.circle2.setGeometry(QtCore.QRect(130, 377, 0, 0))
+			if example_3 == None:
+				wgs.circle3.setGeometry(QtCore.QRect(130, 377, 0, 0))
+			wgs.def_text.setText(word_def)
 			wgs.level.setText("Level " + self.query_wordLevel())
+		
 		except Exception as e:
 			print(e)
-
+		
 	def query_audio(arg):
 		with open('tra_tu.txt', 'r', encoding='utf-8') as f:
 			file = f.readlines()
